@@ -1,9 +1,15 @@
+import Button from "./components/Button/Button";
 
-function App() {
+export function App() {
 
   return (
-    <h1>test</h1>
+    <>
+      <Button variant="danger" />
+      <Button variant="primary" />
+      <Button variant="secondary"/>
+      <Button variant="success"/>
+      <Button />
+    </>
   )
 }
 
-export default App
