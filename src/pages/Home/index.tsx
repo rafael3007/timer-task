@@ -9,14 +9,34 @@ import {
     StartCountdownButton,
     TaskInput,
 } from './styles'
+import { useForm } from "react-hook-form";
 
 export function Home() {
+
+    const {
+        register,
+        handleSubmit,
+        watch
+    } = useForm()
+
+    function handleCreateNewCycle(data: any) {
+        console.log(data)
+    }
+
+    const task = watch("task")
+    const isSubmitDisabled = !task
+
     return (
         <HomeContainer>
-            <form>
+            <form action='' onSubmit={handleSubmit(handleCreateNewCycle)}>
                 <FormContainer>
                     <label htmlFor="task">Vou trabalhar em</label>
-                    <TaskInput id="task" placeholder="Dê um nome para o projeto" list='task-suggestions' />
+                    <TaskInput
+                        id="task"
+                        list='task-suggestions'
+                        placeholder="Dê um nome para o projeto"
+                        {...register("task")}
+                    />
 
                     <datalist id="task-suggestions">
                         <option value="Projeto 1" />
@@ -24,7 +44,7 @@ export function Home() {
                         <option value="Projeto 3" />
                         <option value="Projeto 4" />
                         <option value="Projeto 5" />
-                        
+
                     </datalist>
 
                     <label htmlFor="minutesAmount">durante</label>
@@ -35,6 +55,7 @@ export function Home() {
                         step={5}
                         min={5}
                         max={60}
+                        {...register("minutesAmount", { valueAsNumber: true })}
                     />
 
                     <span>minutos.</span>
@@ -48,7 +69,7 @@ export function Home() {
                     <span>0</span>
                 </CountdownContainer>
 
-                <StartCountdownButton disabled type="submit">
+                <StartCountdownButton type="submit" disabled={isSubmitDisabled}>
                     <Play size={24} />
                     Começar
                 </StartCountdownButton>
