@@ -1,7 +1,7 @@
 import { differenceInSeconds } from "date-fns";
 import { useContext, useEffect } from "react";
-import { CyclesContext } from "../..";
 import { CountdownContainer, Separator } from "./styles";
+import { CyclesContext } from "../../../../contexts/CyclesContent";
 
 export default function Countdown() {
 
