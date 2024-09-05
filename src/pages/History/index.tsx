@@ -39,11 +39,11 @@ export function History() {
                                             }
 
                                             {
-                                                cycle.interruptDate && <Status statusColor='red'>Concluído</Status>
+                                                cycle.interruptDate && <Status statusColor='red'>Finalizado</Status>
                                             }
 
                                             {
-                                                !cycle.interruptDate && !cycle.finishedDate && <Status statusColor='yellow'>Andamento</Status>
+                                                !cycle.interruptDate && !cycle.finishedDate && (<Status statusColor='yellow'>Andamento</Status>)
                                             }
                                         </td>
                                     </tr>
