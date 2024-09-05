@@ -10,13 +10,22 @@ export default function Countdown() {
 
     const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0;
 
+    const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0
+
+    const minutesAmount = Math.floor(currentSeconds / 60);
+    const secondsAmount = currentSeconds % 60;
+
+    const minutes = String(minutesAmount).padStart(2, '0')
+    const seconds = String(secondsAmount).padStart(2, '0')
+
+
     useEffect(() => {
         let interval: number;
 
         if (activeCycle) {
             interval = setInterval(() => {
 
-                const secondsDIfference = differenceInSeconds(new Date(), activeCycle.startDate)
+                const secondsDIfference = differenceInSeconds(new Date(), new Date(activeCycle.startDate))
 
                 if (secondsDIfference >= totalSeconds) {
                     markCurrentCycleAsFinished()
@@ -36,13 +45,6 @@ export default function Countdown() {
         }
     }, [activeCycle, totalSeconds, activeCycleId, markCurrentCycleAsFinished, setSecondsPassed])
 
-    const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0
-
-    const minutesAmount = Math.floor(currentSeconds / 60);
-    const secondsAmount = currentSeconds % 60;
-
-    const minutes = String(minutesAmount).padStart(2, '0')
-    const seconds = String(secondsAmount).padStart(2, '0')
 
     useEffect(() => {
         if (activeCycle) {
